@@ -19,7 +19,7 @@ app.use(express.static("public"));
 
 require('./routes/routes')(app);
 
-// funciton is being used to listen and bind connections
+// This function will bind the connection
 
 app.listen(PORT, function() {
     console.log("App listening on PORT: " + PORT);
