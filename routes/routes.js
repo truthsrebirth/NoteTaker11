@@ -9,9 +9,8 @@ module.exports = app => {
 
     // fs.readFile reads any/all file types
     fs.readFile("db/db.json","utf8", (err, data) => {
-
         if (err) throw err;
-
+        // declare notes to return in json data?
         const notes = JSON.parse(data);
 
     // GET route targeting the api/notes
@@ -33,3 +32,23 @@ module.exports = app => {
         res.json(notes[req.params.id]);
     });
 
+    // GET route for /notes
+    app.get('/notes', function(req,res) {
+        res.sendFile(path.join(__dirname, "../public/notes.html"));
+    });
+
+    // GET route for *
+    app.get('*', function(req,res) {
+        res.sendFile(path.join(__dirname, "../public/index.html"));
+    });
+    
+
+
+    function updateDb() {
+        fs.writeFile("db/db.json",JSON.stringify(notes,'\t'),err => {
+            if (err) throw err;
+            return true;
+        });
+        }
+    });
+}
